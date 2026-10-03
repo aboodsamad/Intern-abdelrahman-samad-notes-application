@@ -1,0 +1,1 @@
+export type Note = {id: number, text: string, title: string, category: string}
