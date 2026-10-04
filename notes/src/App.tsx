@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { AddNotes } from './NotesManagment/addNotes'
 
-
-import './App.css'
+import { useNotes } from './Hooks/hooks';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const { notes, setNotes } = useNotes();
+
 
   return (
-    <AddNotes/>
+    <AddNotes notes={notes} setNotes={setNotes}/>
   )
 }
 

@@ -1,7 +1,8 @@
 import { useState } from "react";
+import type { Note } from "../models/Notes";
 
 export function useNotes(){
-    const [NotesText, useNoteText] = useState("");
+    const [notes , setNotes] = useState<Note[]>([]);
 
-    return {NotesText, useNoteText};
+    return {notes, setNotes};
 }
