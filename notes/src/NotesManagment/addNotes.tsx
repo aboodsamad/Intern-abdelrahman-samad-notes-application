@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import type { Note } from "../models/Notes";
 import { DeleteNotes } from "./DeleteNotes";
+import { EditNotes } from "./EditNotes";
 
 type Props = {
   notes: Note[];
@@ -39,6 +40,7 @@ export function AddNotes({ notes, setNotes }: Props) {
             <>
               <li key={item.id}>{item.text}</li>
               <button onClick={() => DeleteNotes(item.id, {setNotes})}>Delete</button>
+              <EditNotes note = {item} setNotes={setNotes}/> 
             </>
           ))}
         </ul>
