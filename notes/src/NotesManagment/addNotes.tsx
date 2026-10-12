@@ -1,8 +1,8 @@
 import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import type { Note } from "../models/Notes";
-import { DeleteNotes } from "./DeleteNotes";
-import { EditNotes } from "./EditNotes";
+import { NoteForm } from "./notesForm";
+import { NoteItem } from "./noteItem";
 
 type Props = {
   notes: Note[];
@@ -12,54 +12,35 @@ type Props = {
 export function AddNotes({ notes, setNotes }: Props) {
   const [NotesText, setNoteText] = useState("");
   const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("story");
   const [show, setShow] = useState(false);
+  
 
   function AddNote(e: React.FormEvent) {
     e.preventDefault();
     setNotes((prev) => [
       ...prev,
-      { id: Date.now(), text: NotesText, title: title, category: "story" },
+      { id: Date.now(), text: NotesText, title: title, category: category },
     ]);
     setNoteText("");
     setTitle("");
   }
 
   return (
-    <>
-      <form onSubmit={AddNote}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(r) => setTitle(r.target.value)}
-        />
-
-        <input
-          type="text"
-          placeholder="Add Note"
-          value={NotesText}
-          onChange={(r) => setNoteText(r.target.value)}
-        />
-        <button type="submit">Add</button>
-      </form>
-
-      <button onClick={() => setShow(!show)}>{show ? "hide" : "show"}</button>
+    <div className="app">
+      <NoteForm setNotes={setNotes}/>
+      <button className="btn-toggle" onClick={() => setShow(!show)}>
+        {show ? "hide" : "show"}
+      </button>
       <br />
       {show && (
-        <ul>
+        <ul className="note-list">
           {notes.map((item) => (
-            <>
-              <li key={item.id}>
-                <b>{item.title}</b>: {item.text}
-              </li>
-              <button onClick={() => DeleteNotes(item.id, { setNotes })}>
-                Delete
-              </button>
-              <EditNotes note={item} setNotes={setNotes} />
-            </>
+            <NoteItem key={item.id} note={item} setNotes={setNotes} />
+            
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 }
