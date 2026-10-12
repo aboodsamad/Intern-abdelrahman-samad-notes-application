@@ -3,6 +3,7 @@ import type { Dispatch, SetStateAction } from "react";
 import type { Note } from "../models/Notes";
 import { NoteForm } from "./notesForm";
 import { NoteItem } from "./noteItem";
+import { SearchNotes } from "./searchNotes";
 
 type Props = {
   notes: Note[];
@@ -10,34 +11,27 @@ type Props = {
 };
 
 export function AddNotes({ notes, setNotes }: Props) {
-  const [NotesText, setNoteText] = useState("");
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("story");
   const [show, setShow] = useState(false);
-  
-
-  function AddNote(e: React.FormEvent) {
-    e.preventDefault();
-    setNotes((prev) => [
-      ...prev,
-      { id: Date.now(), text: NotesText, title: title, category: category },
-    ]);
-    setNoteText("");
-    setTitle("");
-  }
+  const [query, setQuery] = useState("");
 
   return (
     <div className="app">
-      <NoteForm setNotes={setNotes}/>
+      <NoteForm setNotes={setNotes} />
       <button className="btn-toggle" onClick={() => setShow(!show)}>
         {show ? "hide" : "show"}
       </button>
       <br />
+      <input
+        className="input-search"
+        type="text"
+        placeholder="Search"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
       {show && (
         <ul className="note-list">
-          {notes.map((item) => (
+          {SearchNotes(notes, query).map((item) => (
             <NoteItem key={item.id} note={item} setNotes={setNotes} />
-            
           ))}
         </ul>
       )}
