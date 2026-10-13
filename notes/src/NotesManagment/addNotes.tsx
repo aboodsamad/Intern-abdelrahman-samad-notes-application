@@ -20,17 +20,33 @@ export function AddNotes({ notes, setNotes }: Props) {
   return (
     <div className="app">
       <NoteForm setNotes={setNotes} />
-      <button className="btn-toggle" onClick={() => setShow(!show)}>
-        {show ? "hide" : "show"}
-      </button>
+      <div className="toolbar">
+        <input
+          className="input-search"
+          type="text"
+          placeholder="Search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+
+        <select
+          className="select-filter"
+          value={categoryFilter}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+        >
+          <option value="all">All</option>
+          {categories.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
+
+        <button className="btn-toggle" onClick={() => setShow(!show)}>
+          {show ? "hide" : "show"}
+        </button>
+      </div>
       <br />
-      <input
-        className="input-search"
-        type="text"
-        placeholder="Search"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
       {show && (
         <>
           <ul className="note-list">
@@ -38,18 +54,6 @@ export function AddNotes({ notes, setNotes }: Props) {
               <NoteItem key={item.id} note={item} setNotes={setNotes} />
             ))}
           </ul>
-          <select
-            className="select-filter"
-            value={categoryFilter}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-          >
-            <option value="all">All</option>
-            {categories.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
         </>
       )}
     </div>

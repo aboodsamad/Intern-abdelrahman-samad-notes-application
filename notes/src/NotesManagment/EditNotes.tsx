@@ -24,11 +24,11 @@ export function EditNotes({ note, setNotes }: Props) {
       <input
         className="input-edit"
         type="text"
-        value={note.text}
+        value={note.title}
         onChange={(e) =>
           setNotes((prev) =>
             prev.map((item) =>
-              item.id === note.id ? { ...item, text: e.target.value } : item,
+              item.id === note.id ? { ...item, title: e.target.value } : item,
             ),
           )
         }
