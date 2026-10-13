@@ -1,5 +1,6 @@
 import { useState, type Dispatch, type SetStateAction } from "react";
 import type { Note } from "../models/Notes";
+import { categories } from "../models/Notes";
 
 type Props = {
   note: Note;
@@ -45,10 +46,11 @@ export function EditNotes({ note, setNotes }: Props) {
           )
         }
       >
-        <option value="story">Story</option>
-        <option value="work">Work</option>
-        <option value="personal">Personal</option>
-        <option value="ideas">Ideas</option>
+        {categories.map((c) => (
+          <option key={c} value={c}>
+            {c}
+          </option>
+        ))}
       </select>
     </>
   );

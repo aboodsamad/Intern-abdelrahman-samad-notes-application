@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import type { Note } from "../models/Notes";
+import { categories } from "../models/Notes";
 type Props = {
   setNotes: Dispatch<SetStateAction<Note[]>>;
 };
@@ -42,10 +43,11 @@ export function NoteForm({ setNotes }: Props) {
         value={category}
         onChange={(e) => setCategory(e.target.value)}
       >
-        <option value="story">Story</option>
-        <option value="work">Work</option>
-        <option value="personal">Personal</option>
-        <option value="ideas">Ideas</option>
+        {categories.map((c) => (
+          <option key={c} value={c}>
+            {c}
+          </option>
+        ))}
       </select>
     </form>
   );
