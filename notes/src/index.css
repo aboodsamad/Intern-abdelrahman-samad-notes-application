@@ -15,3 +15,29 @@ body {
   flex-direction: column;
   gap: 16px;
 }
+
+input, select, button {
+  font: inherit;
+  color: inherit;
+  background: #23252e;
+  border: 1px solid #2e303a;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+input:focus, select:focus { outline: 2px solid #c084fc; outline-offset: 1px; }
+button { cursor: pointer; }
+button:hover { background: #2e303a; }
+.select-category, .select-filter { text-transform: capitalize; }
+
+.note-form, .toolbar { display: flex; flex-wrap: wrap; gap: 8px; }
+.input-title { flex: 1 1 140px; }
+.input-note { flex: 3 1 200px; }
+.input-search { flex: 1 1 160px; }
+.note-form button {
+  order: 1;
+  background: #c084fc;
+  color: #16171d;
+  font-weight: 600;
+  border-color: transparent;
+}
+.note-form button:hover { background: #d8b4fe; }
